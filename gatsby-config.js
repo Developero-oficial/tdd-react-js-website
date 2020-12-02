@@ -5,10 +5,10 @@ module.exports = {
       name: `Juan Correa`,
       summary: `Full Stack software engineer.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Test Driven Development con React JS, Jest y React Testing Libray.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: ``,
     },
   },
   plugins: [
