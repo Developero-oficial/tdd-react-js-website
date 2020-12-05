@@ -25,9 +25,10 @@ const Layout = ({ location, title, children }) => {
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
+        {new Date().getFullYear()}, React TDD forma parte de © {` `}
+        <a href="https://developero.io" target="_blank" rel="noreferrer">
+          Developero
+        </a>
       </footer>
     </div>
   )
