@@ -59,7 +59,7 @@ tecnologías.
 Para este tutorial voy a crear una aplicación que consuma una api y
 hacer una lista de resultados.
 
-En mi caso, consumiré la api de <a href="https://thesimpsonsquoteapi.glitch.me/" rel="noopener noreferrer" target="_blank" rel>citas de los Simpson</a> pero el mismo principio va a aplicar si consumes otra api diferente.
+En mi caso, consumiré la api de <a href="https://thesimpsonsquoteapi.glitch.me/" rel="noopener noreferrer" target="_blank">citas de los Simpson</a> pero el mismo principio va a aplicar si consumes otra api diferente.
 
 ### Set up del proyecto
 
@@ -470,7 +470,7 @@ Con esto ya estoy en la fase de GREEN. Agrego los cambios a Git y hago commit.
 
 ### Mock server para el test
 
-Voy a utilizar [Mock Service Worker](https://mswjs.io/) debido a que su uso es extremadamente fácil y me permite hacer pruebas integrando la funcionalidad de llamada a la API.
+Voy a utilizar <a href="https://mswjs.io/" rel="noopener noreferrer" target="_blank">Mock Service Worker</a> debido a que su uso es extremadamente fácil y me permite hacer pruebas integrando la funcionalidad de llamada a la API.
 
 El beneficio de esto es que mi test de integración va a verificar el correcto funcionamiento tanto de mi componente así como de la llamada a la API.
 
@@ -798,7 +798,7 @@ De tarea te dejo lo siguiente:
 
 Hay mucha información en internet sobre TDD.
 
-Si quieres más información sobre el paso a paso sobre cómo seguir implementando TDD en React en muchos otros escenarios de la vida real y que sea con código moderno, te recomiendo que veas mi curso de [Test Driven Development (TDD) en React JS](https://www.udemy.com/course/tdd-react-js/?referralCode=F40803D2C4D2934AB038).
+Si quieres más información sobre el paso a paso sobre cómo seguir implementando TDD en React en muchos otros escenarios de la vida real y que sea con código moderno, te recomiendo que veas mi curso de <a href="https://www.udemy.com/course/tdd-react-js/?referralCode=F40803D2C4D2934AB038" rel="noopener noreferrer" target="_blank">Test Driven Development (TDD) en React JS</a>.
 
 Hacemos paso a paso tres diferentes apps donde aplicamos TDD en:
 
@@ -808,6 +808,6 @@ Hacemos paso a paso tres diferentes apps donde aplicamos TDD en:
 
 - Manejo de autenticación y autorización.
 
-Por otra parte, si quieres aprender a crear componentes realmente reutilizables, te recomiendo que des un ojo a mi ebook [Patrones Avanzados en React JS: Crea componentes realmente reutilizables](https://amzn.to/3qwj3Ua).
+Por otra parte, si quieres aprender a crear componentes realmente reutilizables, te recomiendo que des un ojo a mi ebook <a href="https://amzn.to/3qwj3Ua" rel="noopener noreferrer" target="_blank">Patrones Avanzados en React JS: Crea componentes realmente reutilizables.</a>
 
 Para mayor información da click en los enlaces.

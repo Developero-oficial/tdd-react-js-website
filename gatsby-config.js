@@ -3,7 +3,7 @@ module.exports = {
     title: `TDD con React JS`,
     author: {
       name: `Juan Correa`,
-      summary: `Full Stack software engineer.`,
+      summary: `Full Stack Software Engineer, fundador de Developero, autor de ebooks y cursos sobre desarrollo de software.`,
     },
     description: `Test Driven Development con React JS, Jest y React Testing Libray.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
