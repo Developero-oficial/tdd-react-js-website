@@ -77,7 +77,7 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/react-tdd-sitemap.xml`,
-        // exclude: ["/about/", "/blog/", "/confirm/"],
+        exclude: ["/tdd-react/"],
       },
     },
   ],
