@@ -1,7 +1,7 @@
 ---
 title: Cómo usar TDD en React JS, Jest y React Testing Library
 date: "2020-12-05T22:12:03.284Z"
-description: "Tutorial para aplicar TDD en React JS usando Jest y React Testing Library"
+description: "Tutorial para aplicar TDD paso a paso en React JS usando Jest y React Testing Library incluyendo llamada a API"
 ---
 
 En este post vamos a aprender a cómo crear una app con React JS
@@ -24,7 +24,7 @@ ciclo llamado Red-Green-Refactor.
 
 En esencia, el proceso es el siguiente:
 
-![Chinese Salty Egg](./tdd-flow.svg)
+![ciclo TDD](./tdd-flow.svg)
 
 Donde cada paso significa:
 
@@ -36,9 +36,9 @@ Donde cada paso significa:
 
 Los principales beneficios de aplicar TDD son:
 
-- Crear código que es fácil de testear (al empezar por los tests) -
-  Evitar añadir complejidad accidental al crear lo mínimo necesario
-  (principio YAGNI)
+- Crear código que es fácil de testear (al empezar por los tests).
+- Evitar añadir complejidad accidental al crear lo mínimo necesario
+  (principio YAGNI).
 - Código de **alta calidad.**
 - **Seguridad** de que si rompemos una funcionalidad, nuestras
   pruebas nos avisarán y no los usuarios. ¿Quién dijo miedo a hacer
@@ -47,34 +47,33 @@ Los principales beneficios de aplicar TDD son:
 Sin embargo, es necesario tener cierta experiencia creando tests,
 conocer detección de "code smells" y técnicas de refactor.
 
-Esto debido a que no puedes aplicar TDD si no sabes cómo crear un test y
-no puedes hacer refactor si no conoces los criterios en base a los qué
-basarte.
+Esto es debido a que no puedes aplicar TDD si no sabes cómo crear un test y
+no puedes hacer refactor si no conoces los criterios o principios en los cuáles basarte.
 
 En este post se asume que ya tienes experiencia con React y Jest, por lo
-que no nos dentendremos a explicar los aspectos básicos de esta
-tecnología.
+que no nos dentendremos a explicar los aspectos básicos de estas
+tecnologías.
 
 ## Test Driven Development en componentes de React
 
 Para este tutorial voy a crear una aplicación que consuma una api y
 hacer una lista de resultados.
 
-En mi caso, consumiré la api de [citas de los simpson](https://thesimpsonsquoteapi.glitch.me/) pero el mismo principio va a aplicar si consumes otra api diferente.
+En mi caso, consumiré la api de <a href="https://thesimpsonsquoteapi.glitch.me/" rel="noopener noreferrer" target="_blank">citas de los Simpson</a> pero el mismo principio va a aplicar si consumes otra api diferente.
 
 ### Set up del proyecto
 
-Voy a comenzar creando el proyecto usando create react app debido a que
+Voy a comenzar creando el proyecto usando **create react app** debido a que
 me interesa enfocarme en el desarrollo y no divagar en detalles de
 configuración de webpack y babel.
 
 Abro la terminal, me ubico en el lugar donde quiero tener mi app y
 ejecuto: `npx create-react-app react-tdd-tutorial`.
 
-Con esto ya viene incluido Jest y React Testing Library, las herramientas de test
+Con esto ya viene incluido **Jest y React Testing Library**, las herramientas para test
 que usaremos.
 
-### Estructura de archivos
+### Estructura de archivos de la app
 
 Ya que voy a hacer una aplicación pequeña que consiste en solamente una
 vista, voy a estructurar los archivos de acuerdo a su tipo.
@@ -104,7 +103,7 @@ continuación.
 
 Hago commit y push.
 
-### Cómo empezar con la priemra prueba usando Jest y RTL (RED)
+### Primera prueba usando Jest y React Testing Library (RED)
 
 La mejor manera de empezar es haciendo una prueba que me valide si
 existe un título o encabezado.
@@ -129,7 +128,9 @@ describe("Main Page mount", () => {
 })
 ```
 
-**Nota:** Todas las queries de React Testing Library excepto las que inician por "queryBy\*", si no encuentran el elemento lanzarán una excepción en mi test. A pesar de ello, prefiero agregar el `toBeInTheDocument` para que sea más explícita mi intención en el test:
+**Nota:** Todas las queries de React Testing Library excepto las que inician por "queryBy\*", si no encuentran el elemento lanzarán una excepción en mi test.
+
+A pesar de ello, prefiero agregar el `toBeInTheDocument` para que sea más explícita mi intención en el test.
 
 **Segunda nota:** El matcher `toBeInTheDocument` no existe en el core de Jest. Es accesible gracias a lo que tenemos en `src/setupTests.js`.
 
@@ -166,7 +167,9 @@ Snapshots:   0 total
 Time:        3.775 s
 ```
 
-Falla porque no encuentra el archivo de donde importo mi componente. De momento, voy a crear el archivo `main-page.js` con lo mínimo necesario para hacer que el test me de error por mi `expect`.
+Falla porque no encuentra el archivo de donde importo mi componente.
+
+De momento, voy a crear el archivo `main-page.js` con lo mínimo necesario para hacer que el test me de error por mi `expect`.
 
 Creo una carpeta `components` y dentro creo el archivo `main-page.js`.
 
@@ -238,7 +241,7 @@ Ran all test suites related to changed files.
 
 La razón por la que hago lo mínimo neceario para que la prueba pase es debido a que quiero mantener mi código sin abstracciones innecesarias ni sobre optimizaciones, un error muy común en los desarrolladores que sobre piensan demasiado las cosas.
 
-Hacer lo mínimo necesario me mantiene enfocado en que mi código tenga justo lo que debe tener, y no hacer optimizaciones HASTA que sea realmente necesario.
+Hacer lo mínimo necesario me mantiene enfocado en que el código tenga justo lo que debe tener, y no hacer optimizaciones HASTA que sea realmente necesario.
 
 ### Aplicar el Refactor
 
@@ -275,7 +278,7 @@ export const MainPage = () => (
 
 y mi prueba está igualmente pasando.
 
-Voy a regresar mi implementación como la tenía antes con el `h1` porque ese cambio fue sólo como demostración.
+Voy a regresar mi implementación como la tenía antes con el `h1` porque ese cambio fue sólo como demostración y es una buena práctica usar los elementos HTML nativos para expresar los roles.
 
 Agrego los cambios a Git y hago commit.
 
@@ -304,11 +307,11 @@ En este punto haré refactors menores en caso de detectarlos.
 
 Después de esto voy a crear un `mock server` en mi prueba para mockear la respuesta de la api en mi entorno de test.
 
-En mis pruebas, no consumiré la api real sino que tendré un mock server que me dará los datos que usaré en la lista tal y como está definida la estructura del response de la api real.
+En mis pruebas no consumiré la api real sino que tendré un mock server que me dará los datos que usaré en la lista tal y como está definida la estructura del response de la api real.
 
 En seguida haré lo mínimo necesario para consumir la api real de tal modo que mis pruebas sigan pasando (GREEN) con estos cambios.
 
-Para este punto ahora sí aplicaré un refactor en mi código.
+Para este punto ahora sí aplicaré un refactor mayor en el código.
 
 ### Test para verificar listado (RED)
 
@@ -345,8 +348,6 @@ Corro la prueba y tengo el error esperado:
 
     Unable to find role="listitem"
 ```
-
-Y tengo más output en la consola con todo el contenido actual del render. No lo coloco aquí porque no quiero llenar este post de tanto output de la consola.
 
 ### Hacer que el test de verificar listado pase (GREEN)
 
@@ -469,9 +470,9 @@ Con esto ya estoy en la fase de GREEN. Agrego los cambios a Git y hago commit.
 
 ### Mock server para el test
 
-Voy a utilizar [Mock Service Worker](https://mswjs.io/) debido a que su uso es extremadamente fácil y me permite hacer mis pruebas integrando la funcionalidad de llamada a la API.
+Voy a utilizar <a href="https://mswjs.io/" rel="noopener noreferrer" target="_blank">Mock Service Worker</a> debido a que su uso es extremadamente fácil y me permite hacer pruebas integrando la funcionalidad de llamada a la API.
 
-El beneficio de esto es que mi test de integración va a verificar el correcto funcionamiento de mi componente y mi llamada a la API.
+El beneficio de esto es que mi test de integración va a verificar el correcto funcionamiento tanto de mi componente así como de la llamada a la API.
 
 Ejecuto en la terminal:
 
@@ -504,7 +505,9 @@ const server = setupServer(
 
 Hago un array de citas falsas respetando la estructura de la respuesta de la api real.
 
-Despué creo una instancia del servidor ejecutando `setupServer`. Por parámetro le paso la configuración del endpoint GET `/quotes` cuya respuesta va a ser mi `fakeQuotes` porque así es el response real.
+Después creo una instancia del servidor ejecutando `setupServer`.
+
+Por parámetro le paso la configuración del endpoint GET `/quotes` cuya respuesta va a ser mi `fakeQuotes` porque así es el response real.
 
 En seguida, agrego lo siguiente para hacer que el server se levante antes de correr las pruebas y se cierre ya que finalicen:
 
@@ -531,9 +534,13 @@ it("must contain quote value", async () => {
 })
 ```
 
-Mis pruebas siguen pasando con estos cambios, pero ahora voy a hacer el cambio para consumir la api con lo mínimo necesario.
+Mis pruebas siguen pasando con estos cambios, pero ahora voy a actualizar la implementación para consumir la api real con lo mínimo necesario.
 
-Primero creo una variable de estado para tener el contenido de las citas:
+Primero creo una variable de estado para tener el contenido de las citas que será un array vacío al inicio.
+
+La hago pensando que será un array de objetos donde cada objeto será una cita.
+
+También modifico el render para que me itere esta nueva variable de estado y me cree la lista.
 
 ```js
 export const MainPage = () => {
@@ -553,7 +560,7 @@ export const MainPage = () => {
 }
 ```
 
-Ahora quiero que al montarse el componente, consumir la API. Para esto utilizaré `useEffect` como sigue:
+Ahora quiero que mi componente consuma la API real al montarse el componente. Para esto utilizaré `useEffect` con un array de dependencias vacío como sigue:
 
 ```js
 React.useEffect(
@@ -662,6 +669,7 @@ describe("Main Page mount", () => {
 Ahora en mi implementación voy a agregar una nueva variable de estado como un booleano que me indique cuando mi aoo terminó de hacer el fetch a la API:
 
 ```js
+// código anterior...
 const [isLoading, setIsLoading] = React.useState(true)
 
 React.useEffect(
@@ -672,6 +680,8 @@ React.useEffect(
       .finally(() => setIsLoading(false)),
   []
 )
+
+// resto del código...
 ```
 
 Y en el render:
@@ -734,7 +744,7 @@ Levanto la app con `npm start` y veo que no se están cargando las citas debido 
 fetch("/quotes")
 ```
 
-Para resolverlo, voy a crear una variable `baseUrl` que contenga el valor de la API real.
+Para resolverlo, voy a crear una constante `baseUrl` que contenga el valor de la API real.
 
 ```js
 const baseUrl =
@@ -749,7 +759,17 @@ Estoy haciendo un operador ternario donde si mi entorno de ejecución es diferen
 
 De este modo mi app ya está funcionando y mis tests siguen pasando.
 
-No encuentro refactors para hacer, por lo que agrego los cambios a Git y hago commit.
+**Nota:** Es recomendable crear una nueva variable de estado para guardar el valor de la base url del endpoint real. Una manera de hacerlo es creando un archivo .env en raíz del proyecto y colocando:
+
+```
+REACT_APP_BASE_URL=https://thesimpsonsquoteapi.glitch.me/
+```
+
+Y leyendo esta variable de estado en mi serivcio.
+
+Si lo haces y tienes la app corriendo, debes volver a iniciarla para que tome el cambio de la variable de entorno.
+
+Agrego los cambios a Git y hago commit.
 
 ### Palabras finales
 
@@ -757,9 +777,13 @@ Hasta ahora hemos tenido un muy buen inicio aplicando TDD a una app hecha en Rea
 
 Hemos logrado hacer las pruebas para el "happy path" o el escenario donde todo marcha bien.
 
-Hace falta considerar los escenarios donde tengamos errores. Siempre hay que considerar estos escenarios porque todo lo malo que pueda pasar en producción, seguramente va a pasar (Ley de Murphy).
+Hace falta considerar los escenarios donde tengamos errores.
 
-Y lo mejor es que tengamos nuestro código y set de pruebas listos para ellos. No le temeremos a las fallas porque o las tenemos identificadas y correctamente manejadas, o la limpieza de nuestro código en las fases de refactors nos permitirán hacer las modificaciones fácilmente.
+Siempre hay que considerar estos escenarios porque todo lo malo que pueda pasar en producción, seguramente va a pasar (Ley de Murphy).
+
+Y lo mejor es que tengamos nuestro código y set de pruebas listos para ellos.
+
+No le temeremos a las fallas porque o las tenemos identificadas y correctamente manejadas, o la limpieza de nuestro código en las fases de refactors nos permitirán hacer las modificaciones fácilmente.
 
 Y lo mejor de todo: todos nuestras pruebas van a estar preparadas para indicarnos si en un refactor o cambio estamos cometiendo un error.
 
@@ -774,7 +798,7 @@ De tarea te dejo lo siguiente:
 
 Hay mucha información en internet sobre TDD.
 
-Si quieres tener información y paso a paso sobre cómo seguir implementando TDD en React en muchos otros escenarios y que sea con código moderno, te recomiendo que veas mi curso de [Test Driven Development (TDD) en React JS](https://www.udemy.com/course/tdd-react-js/?referralCode=F40803D2C4D2934AB038).
+Si quieres más información sobre el paso a paso sobre cómo seguir implementando TDD en React en muchos otros escenarios de la vida real y que sea con código moderno, te recomiendo que veas mi curso de <a href="https://www.udemy.com/course/tdd-react-js/?referralCode=F40803D2C4D2934AB038" rel="noopener noreferrer" target="_blank">Test Driven Development (TDD) en React JS</a>.
 
 Hacemos paso a paso tres diferentes apps donde aplicamos TDD en:
 
@@ -784,6 +808,6 @@ Hacemos paso a paso tres diferentes apps donde aplicamos TDD en:
 
 - Manejo de autenticación y autorización.
 
-Por otra parte, si quieres aprender a crear componentes realmente reutilizables, te recomiendo que des un ojo a mi ebook [Patrones Avanzados en React JS: Crea componentes realmente reutilizables](https://amzn.to/3qwj3Ua).
+Por otra parte, si quieres aprender a crear componentes realmente reutilizables, te recomiendo que des un ojo a mi ebook <a href="https://amzn.to/3qwj3Ua" rel="noopener noreferrer" target="_blank">Patrones Avanzados en React JS: Crea componentes realmente reutilizables.</a>
 
 Para mayor información da click en los enlaces.
