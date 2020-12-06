@@ -567,8 +567,7 @@ React.useEffect(
   () =>
     getQuotes()
       .then(response => response.json())
-      .then(data => setQuotes(data))
-      .finally(() => setIsLoading(false)),
+      .then(data => setQuotes(data)),
   []
 )
 ```
@@ -666,7 +665,7 @@ describe("Main Page mount", () => {
 })
 ```
 
-Ahora en mi implementación voy a agregar una nueva variable de estado como un booleano que me indique cuando mi aoo terminó de hacer el fetch a la API:
+Ahora en mi implementación voy a agregar una nueva variable de estado como un booleano que me indique cuando mi app terminó de hacer el fetch a la API:
 
 ```js
 // código anterior...
