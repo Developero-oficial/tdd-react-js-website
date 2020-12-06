@@ -7,24 +7,38 @@ import SEO from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+  const posts = data.posts.nodes
+  const mainPost = data.mainPost
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="TDD react JS" />
       <Bio />
 
-      <h4>Otros tutoriales de TDD en React</h4>
+      <h1>
+        Tutorial para aplicar TDD en React JS usando Jest y React Testing
+        Library
+      </h1>
+      <section
+        dangerouslySetInnerHTML={{ __html: mainPost.html }}
+        itemProp="articleBody"
+      />
 
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => (
-          <li key={post.fields.slug} className="post-list-item">
-            <Link to={post.fields.slug} itemProp="url">
-              {post.frontmatter.title || post.fields.slug}
-            </Link>
-          </li>
-        ))}
-      </ol>
+      {!!posts.length && (
+        <>
+          <h4>Otros tutoriales de TDD en React</h4>
+
+          <ol style={{ listStyle: `none` }}>
+            {posts.map(post => (
+              <li key={post.fields.slug} className="post-list-item">
+                <Link to={post.fields.slug} itemProp="url">
+                  {post.frontmatter.title || post.fields.slug}
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
     </Layout>
   )
 }
@@ -38,7 +52,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    posts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { slug: { ne: "/tdd-react/" } } }
+    ) {
       nodes {
         excerpt
         fields {
@@ -50,6 +67,10 @@ export const pageQuery = graphql`
           description
         }
       }
+    }
+    mainPost: markdownRemark(fields: { slug: { eq: "/tdd-react/" } }) {
+      id
+      html
     }
   }
 `
