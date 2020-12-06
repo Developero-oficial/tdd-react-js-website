@@ -12,7 +12,10 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="TDD react JS" />
+      <SEO
+        title="TDD react JS"
+        description="Tutorial para aplicar TDD paso a paso en React JS usando Jest y React Testing Library incluyendo llamada a API"
+      />
       <Bio />
 
       <h1>

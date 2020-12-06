@@ -1,7 +1,7 @@
 ---
 title: Cómo usar TDD en React JS, Jest y React Testing Library
 date: "2020-12-05T22:12:03.284Z"
-description: "Tutorial para aplicar TDD en React JS usando Jest y React Testing Library"
+description: "Tutorial para aplicar TDD paso a paso en React JS usando Jest y React Testing Library incluyendo llamada a API"
 ---
 
 En este post vamos a aprender a cómo crear una app con React JS
